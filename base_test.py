@@ -1,7 +1,10 @@
 import unittest
+import random
+import string
 from selenium import webdriver
 import time
 from selenium.webdriver.common.by   import By
+from selenium.common.exceptions import NoAlertPresentException
 
 class BaseTest(unittest.TestCase):
 
@@ -22,13 +25,25 @@ class BaseTest(unittest.TestCase):
         self.sleep()
         self.driver.find_element(by, search).click()
 
-    def is_element_present(self, how, what):
+    def isElementPresent(self, how, what):
         self.sleep()
         try:
             self.driver.find_element(how, what)
         except:
             return False
-        return True
+        return True  
+
+    def generateRandomUsername(self):
+        letters = string.ascii_letters
+        random_string = ''.join(random.choice(letters) for _ in range(10))
+        return random_string
+
+    def isAlertPresent(self, message):
+        try:
+            self.sleep()
+            return self.driver.switch_to.alert.text == message
+        except NoAlertPresentException:
+            return False
     
     def tearDown(self):
         self.driver.quit()
