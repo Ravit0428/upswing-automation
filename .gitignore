@@ -1,0 +1,5 @@
+# Ignore reports folder
+reports/
+
+# Ignore Python cache files
+__pycache__/
