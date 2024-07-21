@@ -15,7 +15,7 @@ class BaseTest(unittest.TestCase):
             self.assertIn("STORE", self.driver.title)
     
     def sleep(self):
-        time.sleep(1)
+        time.sleep(5)
 
     def enterInput(self, by, search, input):
         self.sleep()
@@ -47,3 +47,8 @@ class BaseTest(unittest.TestCase):
     
     def tearDown(self):
         self.driver.quit()
+
+    def AcceptAlert(self):
+        alert = self.driver.switch_to.alert
+        alert.accept()
+        
